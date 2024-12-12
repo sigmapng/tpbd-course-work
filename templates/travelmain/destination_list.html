@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Destinations</h1>
+<ul>
+  {% for destination in destinations %}
+  <li>
+    <a href="{% url 'tour_detail' destination.id %}">{{ destination.name }}</a>
+    - {{ destination.city }}, {{ destination.country }}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
