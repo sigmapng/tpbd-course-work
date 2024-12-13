@@ -1,15 +1,24 @@
 {% extends 'base.html' %}
 
-{% load static %}
+{% block title %}About Us{% endblock %}
 
 {% block content %}
-<h1>About Us</h1>
-<p>Welcome to our travel agency. We offer the best tours and travel packages to make your vacation unforgettable.</p>
-{% endblock %}
+<div class="container mt-4">
+  <h1>About Us</h1>
+  <p>Welcome to our travel agency. We offer the best tours and travel packages to make your vacation unforgettable.</p>
+  <p>Our mission is to provide exceptional travel experiences that create lasting memories. We are dedicated to offering
+    personalized service and expert advice to help you plan the perfect trip.</p>
+  <p>Whether you're looking for a relaxing beach vacation, an adventurous trek, or a cultural exploration, we have
+    something for everyone. Our team of experienced travel consultants is here to assist you every step of the way.</p>
+</div>
 
 {% block tours %}
-<h2>Check Available Tours</h2>
-<img src="{% static 'tour_image_url' %}" alt="Tour image preview">
-<p>Explore our wide range of tours and find the perfect one for you.</p>
-<a href="{% url 'tours' %}" class="btn btn-primary">View Tours</a>
+<div class="container mt-4">
+  <h2>Check Available Tours</h2>
+  <p>Explore our wide range of tours and find the perfect one for you.</p>
+  <a href="{% url 'tour_list' %}" class="btn btn-primary">View Tours</a>
+</div>
+{% endblock %}
+
+</div>
 {% endblock %}

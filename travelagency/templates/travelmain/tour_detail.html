@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ tour.name }}</h1>
-<img src="{{ tour.image.url }}" alt="{{ tour.name }}" class="tour-image">
-<p>{{ tour.description }}</p>
-<p>Price: {{ tour.price }}</p>
-<a href="{% url 'create_booking' tour.id %}" class="btn btn-primary">Book Now</a>
-<h2>Reviews</h2>
-{% for review in tour.reviews.all %}
-<div class="review">
-  <p>{{ review.customer.first_name }} {{ review.customer.last_name }}:</p>
-  <p>{{ review.text }}</p>
+<div class="box">
+  <h1>{{ tour.name }}</h1>
+  <img src="{{ tour.image.url }}" alt="{{ tour.name }}" class="tour-image">
+  <p>{{ tour.description }}</p>
+  <p id="price">Price: {{ tour.price }}</p>
+  <a href="{% url 'create_booking' tour.id %}" class="btn btn-primary">Book Now</a>
+  <h2>Reviews</h2>
+  {% for review in tour.reviews.all %}
+  <div class="review">
+    <p>{{ user.username }}:</p>
+    <p>{{ review.text }}</p>
+  </div>
+  {% endfor %}
+  <a href="{% url 'add_review' tour.id %}" class="btn btn-secondary">Add Review</a>
 </div>
-{% endfor %}
-<a href="{% url 'add_review' tour.id %}" class="btn btn-secondary">Add Review</a>
 {% endblock %}

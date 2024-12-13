@@ -3,45 +3,32 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 
-class Destination(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    country = models.CharField(max_length=100)
-    city = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='destinations/', null=True, blank=True)
-
-    def __str__(self):
-        return self.name
-
-
 class Tour(models.Model):
-    destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     description = models.TextField()
+    country = models.CharField(max_length=100, default='Unknown Country')
+    city = models.CharField(max_length=100, default='Unknown City')
+    image = models.ImageField(upload_to='tours/', null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     start_date = models.DateField()
     end_date = models.DateField()
-    available = models.BooleanField(default=True)
-    owner = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='tours', null=True, blank=True)
 
     def __str__(self):
         return self.name
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, default=1)  # Set default value here
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return self.user.username
 
 
 class Booking(models.Model):
     tour = models.ForeignKey(Tour, on_delete=models.CASCADE)
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     number_of_people = models.IntegerField()
+    number_of_days = models.IntegerField(default=1)
     date = models.DateField(default=timezone.now)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
 

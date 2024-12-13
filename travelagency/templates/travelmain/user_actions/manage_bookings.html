@@ -7,6 +7,9 @@
     <tr>
       <th>Tour</th>
       <th>Date</th>
+      <th>Number of Days</th>
+      <th>Number of People</th>
+      <th>Total Price</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -15,6 +18,9 @@
     <tr>
       <td>{{ booking.tour.name }}</td>
       <td>{{ booking.date }}</td>
+      <td>{{ booking.number_of_days }}</td>
+      <td>{{ booking.number_of_people }}</td>
+      <td>{{ booking.total_price }}</td>
       <td>
         <form method="post" action="{% url 'manage_bookings' %}">
           {% csrf_token %}

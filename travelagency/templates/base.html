@@ -8,7 +8,7 @@
   <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
   <title>{% block title %}Travel Agency{% endblock %}</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
   {% block extra_head %}{% endblock %}
 </head>
 
@@ -18,7 +18,7 @@
     <img src="{% static 'img/white-logo.png' %}" alt="White plane icon" id="logo">
     <nav>
       <ul>
-        <li><a href="{% url 'destination_list' %}">Home</a></li>
+        <li><a href="{% url 'tour_list' %}">Home</a></li>
         <li><a href="{% url 'about_us' %}">About Us</a></li>
         {% if user.is_authenticated %}
         {% if user.is_staff %}

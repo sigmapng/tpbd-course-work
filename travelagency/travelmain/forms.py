@@ -15,7 +15,7 @@ class UserRegisterForm(UserCreationForm):
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['number_of_people', 'date']
+        fields = ['number_of_people', 'date', 'number_of_days']
 
 
 class ReviewForm(forms.ModelForm):
@@ -24,13 +24,8 @@ class ReviewForm(forms.ModelForm):
         fields = ['text']
 
 
-class UserLoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
-
-
 class TourForm(forms.ModelForm):
     class Meta:
         model = Tour
-        fields = ['destination', 'name', 'description',
-                  'price', 'start_date', 'end_date', 'available']
+        fields = ['name', 'description', 'country', 'city',
+                  'image', 'price', 'start_date', 'end_date']

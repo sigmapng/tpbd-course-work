@@ -1,38 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Tours Management</h1>
-<form method="get">
-  <input type="text" name="q" placeholder="Search tours" value="{{ request.GET.q }}">
-  <button type="submit">Search</button>
-</form>
-<table>
-  <thead>
-    <tr>
-      <th>Tour Name</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for tour in tours %}
-    <tr>
-      <td>{{ tour.name }}</td>
-      <td>{{ tour.description }}</td>
-      <td>{{ tour.price }}</td>
-      <td>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#editTourModal{{ tour.id }}">Edit</button>
-        <form method="post" action="{% url 'delete_tour' tour.id %}" style="display:inline;">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-<button class="btn btn-success" data-toggle="modal" data-target="#addTourModal">Add New Tour</button>
+<div class="container mt-4">
+  <h1>Tours Management</h1>
+  <form method="get" class="form-inline mb-3">
+    <input type="text" name="q" class="form-control mr-2" placeholder="Search tours" value="{{ request.GET.q }}">
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Tour Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tour in tours %}
+      <tr id="tour-{{ tour.id }}">
+        <td>{{ tour.name }}</td>
+        <td>{{ tour.description }}</td>
+        <td>{{ tour.price }}</td>
+        <td>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#editTourModal{{ tour.id }}">Edit</button>
+          <form method="post" action="{% url 'delete_tour' tour.id %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button class="btn btn-success" data-toggle="modal" data-target="#addTourModal">Add New Tour</button>
+</div>
 
 <!-- Add Tour Modal -->
 <div class="modal fade" id="addTourModal" tabindex="-1" role="dialog" aria-labelledby="addTourModalLabel"
