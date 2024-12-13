@@ -2,22 +2,16 @@
 
 {% block content %}
 <h1>{{ tour.name }}</h1>
+<img src="{{ tour.image.url }}" alt="{{ tour.name }}" class="tour-image">
 <p>{{ tour.description }}</p>
-<p>Price: ${{ tour.price }}</p>
-<p>Start Date: {{ tour.start_date }}</p>
-<p>End Date: {{ tour.end_date }}</p>
-
+<p>Price: {{ tour.price }}</p>
+<a href="{% url 'create_booking' tour.id %}" class="btn btn-primary">Book Now</a>
 <h2>Reviews</h2>
-<ul>
-  {% for review in reviews %}
-  <li>
-    <strong>{{ review.customer.first_name }} {{ review.customer.last_name }}</strong>
-    - Rating: {{ review.rating }}
-    <p>{{ review.comment }}</p>
-  </li>
-  {% endfor %}
-</ul>
-
-<a href="{% url 'create_booking' tour.id %}">Book this tour</a>
-<a href="{% url 'add_review' tour.id %}">Add a review</a>
+{% for review in tour.reviews.all %}
+<div class="review">
+  <p>{{ review.customer.first_name }} {{ review.customer.last_name }}:</p>
+  <p>{{ review.text }}</p>
+</div>
+{% endfor %}
+<a href="{% url 'add_review' tour.id %}" class="btn btn-secondary">Add Review</a>
 {% endblock %}

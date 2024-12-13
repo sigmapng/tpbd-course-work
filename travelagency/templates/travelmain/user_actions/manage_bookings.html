@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Manage Your Bookings</h1>
+{% if bookings %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Tour</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for booking in bookings %}
+    <tr>
+      <td>{{ booking.tour.name }}</td>
+      <td>{{ booking.date }}</td>
+      <td>
+        <form method="post" action="{% url 'manage_bookings' %}">
+          {% csrf_token %}
+          <input type="hidden" name="booking_id" value="{{ booking.id }}">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>You have no bookings.</p>
+{% endif %}
+{% endblock %}

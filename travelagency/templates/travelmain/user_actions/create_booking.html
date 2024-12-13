@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Create Booking for {{ tour.name }}</h1>
+<form method="post" action="{% url 'create_booking' tour.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Create Booking</button>
+</form>
+{% endblock %}

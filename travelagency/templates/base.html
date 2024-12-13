@@ -5,26 +5,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Agency</title>
+  <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
+  <title>{% block title %}Travel Agency{% endblock %}</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  {% block extra_head %}{% endblock %}
 </head>
 
 <body>
   <header>
     <h1>Travel Agency</h1>
+    <img src="{% static 'img/white-logo.png' %}" alt="White plane icon" id="logo">
     <nav>
       <ul>
         <li><a href="{% url 'destination_list' %}">Home</a></li>
+        <li><a href="{% url 'about_us' %}">About Us</a></li>
+        {% if user.is_authenticated %}
+        {% if user.is_staff %}
+        <li><a href="{% url 'admin:index' %}">Admin Panel</a></li>
+        <li><a href="{% url 'tours_panel' %}">Manage Tours</a></li>
+        <li><a href="{% url 'bookings_panel' %}">Manage Bookings</a></li>
+        <li><a href="{% url 'users_panel' %}">Manage Users</a></li>
+        {% endif %}
+        <li><a href="{% url 'manage_bookings' %}">My Bookings</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+        {% endif %}
       </ul>
     </nav>
   </header>
+
   <main>
     {% block content %}
     {% endblock %}
   </main>
+
   <footer>
-    <p>&copy; 2023 Travel Agency</p>
+    <p>&copy; 2024 Opanasenko Andriiy</p>
   </footer>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <h1>Destinations</h1>
-<ul>
-  {% for destination in destinations %}
-  <li>
-    <a href="{% url 'tour_detail' destination.id %}">{{ destination.name }}</a>
-    - {{ destination.city }}, {{ destination.country }}
-  </li>
-  {% endfor %}
-</ul>
+{% for destination in destinations %}
+<div class="destination">
+  <img src="{{ destination.image.url }}" alt="{{ destination.name }}" class="destination-image">
+  <div class="destination-info">
+    <h2>{{ destination.name }}</h2>
+    <p>{{ destination.description }}</p>
+    <p>{{ destination.city }}, {{ destination.country }}</p>
+    <a href="{% url 'tour_detail' destination.id %}" class="btn btn-primary">View Tours</a>
+  </div>
+</div>
+{% endfor %}
 {% endblock %}

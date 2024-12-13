@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<h1>About Us</h1>
+<p>Welcome to our travel agency. We offer the best tours and travel packages to make your vacation unforgettable.</p>
+{% endblock %}
+
+{% block tours %}
+<h2>Check Available Tours</h2>
+<img src="{% static 'tour_image_url' %}" alt="Tour image preview">
+<p>Explore our wide range of tours and find the perfect one for you.</p>
+<a href="{% url 'tours' %}" class="btn btn-primary">View Tours</a>
+{% endblock %}

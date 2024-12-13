@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Booking Summary</h1>
+    <form method="get" class="form-inline mb-3">
+        <input type="text" name="q" class="form-control mr-2" placeholder="Search bookings" value="{{ request.GET.q }}">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tour</th>
+                <th>Customer</th>
+                <th>Booking Date</th>
+                <th>Number of People</th>
+                <th>Total Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.tour.name }}</td>
+                <td>{{ booking.customer.first_name }} {{ booking.customer.last_name }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <td>{{ booking.number_of_people }}</td>
+                <td>{{ booking.total_price }}</td>
+                <td>
+                    <form method="post" action="{% url 'delete_booking' booking.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
